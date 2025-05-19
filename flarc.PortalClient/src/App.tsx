@@ -1,9 +1,9 @@
+import {HomeComponent} from 'components'
+
 function App() {
 
   return (
-    <Router>
- 
-</Router>
+      <HomeComponent />
   );
 }
 
