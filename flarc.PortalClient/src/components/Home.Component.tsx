@@ -1,8 +1,9 @@
 import './Home.Component.scss'
+import {Label} from "nhsuk-react-components";
 
 function HomeComponent() {
     return (
-        <h1 className={"nhsuk-heading-l"}>Portal Landing 3</h1>
+        <Label isPageHeading={true}>Landing Page</Label>
     );
 }
 
