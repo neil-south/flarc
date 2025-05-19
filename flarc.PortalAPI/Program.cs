@@ -1,5 +1,6 @@
 using Microsoft.OpenApi.Models;
-
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Http.Resilience;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,9 @@ builder.Services.AddSwaggerGen(opt =>
 
 });
 
+builder.Services.AddHealthChecks()
+    .AddCheck("self", () => HealthCheckResult.Healthy());
+
 
 var app = builder.Build();
 
@@ -35,6 +39,23 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+app.MapHealthChecks("/health");
+
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSpa(spa =>
+    {
+        spa.UseProxyToSpaDevelopmentServer("http://localhost:5173");
+    });
+}
+else
+{
+    // Only use fallback in production
+    app.MapFallbackToFile("index.html");
+}
 
 app.Run();
 

@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "NHS.Pathways.EdStreamer.PortalApi": {
+    "flarc.PortalApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
