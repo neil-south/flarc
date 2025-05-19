@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
+WORKDIR /app
+COPY . .
+EXPOSE 8080
+
+RUN apk add --no-cache icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+ENV DOTNET_SYSTEM_GLOBALIZATION_CULTURE=en-GB
+ENV DOTNET_SYSTEM_GLOBALIZATION_UI_CULTURE=en-GB
+ENV LANG=en_GB.UTF-8
+
+ENTRYPOINT ["dotnet", "NHS.Pathways.EdStreamer.PortalApi.dll"]
